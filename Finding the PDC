@@ -1,4 +1,5 @@
 # Finding the PDC
+# Copy the below to a powershell script
 
 # Store the domain object in the $domainObj variable
 $domainObj =
