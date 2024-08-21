@@ -9,5 +9,8 @@ $domainObj =
 # Store the PdcRoleOwner name to the $PDC variable
 $PDC = $domainObj.PdcRoleOwner.Name
 
+# Store the Distinguished Name variable into the $DN variable
+$DN = ([adsi]'').distinguishedName
+
 #Print the variable
 $domainObj
