@@ -1,6 +1,7 @@
 # Finding the PDC, DN and creating an LDAP path for us
 # Copy the below to a powershell script
 # Run powershell instance with powershell -ep bypass
+# Execute your new powershell script .\{File name}
 
 # Store the primary domain controller object in the $PDC variable
 $PDC =
