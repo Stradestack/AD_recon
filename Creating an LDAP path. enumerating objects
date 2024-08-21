@@ -5,23 +5,27 @@
 ## Run powershell instance with powershell -ep bypass
 ## Execute your new powershell script .\{File name}
 
-# Store the primary domain controller's name in the $PDC variable
+# Find PDC
 $PDC = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
 
-# Store the Distinguished Name variable into the $DN variable
+# Find DN
 $DN = ([adsi]'').distinguishedName
 
-# Format our two variables to our desired LDAP path
-$LDAP = "LDAP://$PDC/$DN"
-
 # Print our desired LDAP path
+$LDAP = "LDAP://$PDC/$DN"
 $LDAP
 
 ## Adding some object searching to our script
 # changing the samAccountType will allow you to retrieve different objects (decimal notation)(eg: 805306368) this is currently setup for retrieving all users.
+
+# Encapsulate Top of LDAP dir in a search query
 $direntry = New-Object System.DirectoryServices.DirectoryEntry($LDAP)
 $dirsearcher = New-Object System.DirectoryServices.DirectorySearcher($direntry)
+
+# Filter search query based on account type (In decimal)
 $dirsearcher.filter='samAccountType=805306368"
+
+# Find all objects & their properties and move each object to a new line
 $result = $dirsearcher.FindAll()
 
 Foreach($obj in $result)
