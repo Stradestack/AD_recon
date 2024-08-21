@@ -17,13 +17,14 @@ $LDAP
 
 ## Adding some object searching to our script
 # changing the samAccountType will allow you to retrieve different objects (decimal notation)(eg: 805306368) this is currently setup for retrieving all users.
+# if you wanted to filter everything for a specific user change it to $dirsearcher.filter="name=<user>"
 
 # Encapsulate Top of LDAP dir in a search query
 $direntry = New-Object System.DirectoryServices.DirectoryEntry($LDAP)
 $dirsearcher = New-Object System.DirectoryServices.DirectorySearcher($direntry)
 
 # Filter search query based on account type (In decimal)
-$dirsearcher.filter='samAccountType=805306368"
+$dirsearcher.filter="samAccountType=805306368"
 
 # Find all objects & their properties and move each object to a new line
 $result = $dirsearcher.FindAll()
@@ -31,6 +32,7 @@ $result = $dirsearcher.FindAll()
 Foreach($obj in $result)
 {
   Foreach($prop in $obj.Properties)
+# If you want to filter a particular property append $prop below (for eg. $prop.memberof)
   {
     $prop
   }
