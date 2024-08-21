@@ -1,13 +1,12 @@
-# Finding the PDC, DN and creating an LDAP path for us
-# The below script uses powershell, .NET classes and ADSI to dynamically obtain the full LDAP path for AD enumeration
+## Finding the PDC, DN and creating an LDAP path for us
+## The below script uses powershell, .NET classes and ADSI to dynamically obtain the full LDAP path for AD enumeration
 
-# Copy the below to a powershell script
-# Run powershell instance with powershell -ep bypass
-# Execute your new powershell script .\{File name}
+## Copy the below to a powershell script
+## Run powershell instance with powershell -ep bypass
+## Execute your new powershell script .\{File name}
 
-# Store the primary domain controller object in the $PDC variable
-$PDC =
-[System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
+# Store the primary domain controller's name in the $PDC variable
+$PDC = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
 
 # Store the Distinguished Name variable into the $DN variable
 $DN = ([adsi]'').distinguishedName
@@ -17,3 +16,20 @@ $LDAP = "LDAP://$PDC/$DN"
 
 # Print our desired LDAP path
 $LDAP
+
+## Adding some object searching to our script
+# changing the samAccountType will allow you to retrieve different objects (decimal notation)(eg: 805306368) this is currently setup for retrieving all users.
+$direntry = New-Object System.DirectoryServices.DirectoryEntry($LDAP)
+$dirsearcher = New-Object System.DirectoryServices.DirectorySearcher($direntry)
+$dirsearcher.filter='samAccountType=805306368"
+$result = $dirsearcher.FindAll()
+
+Foreach($obj in $result)
+{
+  Foreach($prop in $obj.Properties)
+  {
+    $prop
+  }
+
+  Write-Host "-----------------------------"
+}
