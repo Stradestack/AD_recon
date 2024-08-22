@@ -1,8 +1,11 @@
-## Function encapsulating the LDAP path creator and AD search query
-## Allowing for user command line input to adjust filtration
+## Function containing the LDAP path creator and AD search query
+## Enabling user cmd-line input to specify the search filter
+
 ## When you have created the ps1 file. Import it to memory with Import-Module .\{name}.ps1
 ## Usage LDAPSearch -LDAPQuery "(samAccountType=805306368)"
 ## You can swap out samAccountType with your own filter, like "(objectclass=group)" to list all the groups in the domain
+
+## This script enumerates more groups than net.exe, This is because it enumerates all AD objects including Domain Local Groups (not just global groups)
 
 function LDAPSearch {
     param (
