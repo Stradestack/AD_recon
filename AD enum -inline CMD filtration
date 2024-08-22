@@ -1,5 +1,8 @@
 ## Function encapsulating the LDAP path creator and AD search query
 ## Allowing for user command line input to adjust filtration
+## When you have created the ps1 file. Import it to memory with Import-Module .\{name}.ps1
+## Usage LDAPSearch -LDAPQuery "(samAccountType=805306368)"
+## You can swap out samAccountType with your own filter, like "(objectclass=group)" to list all the groups in the domain
 
 function LDAPSearch {
     param (
