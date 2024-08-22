@@ -1,5 +1,6 @@
 ## Finding the PDC, DN and creating an LDAP path for us
 ## The below script uses powershell, .NET classes and ADSI to dynamically obtain the full LDAP path for AD enumeration
+### Wont enumerate nested groups
 
 ## Copy the below to a powershell script
 ## Run powershell instance with powershell -ep bypass
