@@ -1,0 +1,13 @@
+## Make queries in the context of a different user by setting the DirectoryEntry instance
+
+$user = Strade
+$pass = Stack
+
+$domainObj = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()
+$PDC = ($domainObj.PdcRoleOwner).Name
+$SearchString = "LDAP://"
+$SearchString += SPDC + "/"
+$DistinguishedName = "DC=$($domainObj.Name.Replace('.',',DC='))"
+$SearchString += $DistinguishedName
+New-Object
+System.DirectoryServices.DirectoryEntry($SearchString,$user,$pass)
