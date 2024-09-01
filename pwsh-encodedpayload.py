@@ -2,6 +2,7 @@
 # Change TCPClient with the IP and port of your kali machine
 # then execute with:
 # python3 pwsh-encodedpayload.py
+# Write the output to $Command in New-PSCredentialObj.ps1
 
 import sys
 import base64
