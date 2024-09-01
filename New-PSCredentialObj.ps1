@@ -1,3 +1,6 @@
+# This script creates a win32calc process on a specified remote machine, after supplying creds.
+# Can be used in combination with the payload made from powershell-payload for persistence
+
 # Creating a PSCredential Object in powershell
 $username = 'stradestack';
 $password = 'stradestack';
